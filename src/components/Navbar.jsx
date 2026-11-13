@@ -1,13 +1,27 @@
 import { faBars, faCircleUser, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 200);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     return (
 
-        <div className="sticky top-0 z-50 bg-black py-2 px-4">
+        <div className={`sticky top-0 z-50 ${scrolled ? 'bg-black/80' : 'bg-black'} py-2 px-4`}>
             {/* <div className="relative max-w-xs mx-auto">
                             <form action="/">
                                 <input type="text" className="bg-gray-300 size-full my-3 rounded-xl h-6 pl-3 pr-15 py-2" />
@@ -18,7 +32,7 @@ function Navbar() {
                         </div> */}
             <nav className="flex justify-between items-center w-[92%] mx-auto py-1 ">
                 <h1 className="text-orange-700 font-bold text-xl">NONTONS</h1>
-                <ul className={`absolute md:static bg-black  z-20 ${isMenuOpen ? 'top-full' : 'top-[-1000%]'} left-0 w-full md:w-auto flex items-center flex-col md:flex-row gap-[10vh] md:gap-10 lg:gap-20 min-h-[60vh] md:min-h-fit justify-center duration-400`}>
+                <ul className={`absolute md:static bg-black/80 md:bg-black/0 z-20 ${isMenuOpen ? 'top-full' : 'top-[-1000%]'} left-0 w-full md:w-auto flex items-center flex-col md:flex-row gap-[10vh] md:gap-10 lg:gap-20 min-h-[60vh] md:min-h-fit justify-center duration-400`}>
                     <li>
                         <Link to={'/'} className={`hover:text-orange-700 ${location.pathname === '/' ? 'text-yellow-400' : 'text-white'}`}>Now Playing</Link>
                     </li>

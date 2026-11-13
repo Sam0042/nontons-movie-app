@@ -30,7 +30,7 @@ function App() {
     //   <Hero datas={movies} apiKey={API_KEY} />
     //   <CardsContainer datas={movies} />
     // </div>
-    <main>
+    <main className='bg-black'>
       <Routes>
         <Route path='/' element={<Home datas={movies} API_KEY={API_KEY} />} />
         <Route path='/popular' element={<Popular />} />
