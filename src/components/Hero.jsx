@@ -1,6 +1,5 @@
-import { faCircle, faSearch, faStar } from "@fortawesome/free-solid-svg-icons"
+import { faCirclePlay, faSearch, faStar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { CirclePlay } from "lucide-react"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 
@@ -8,13 +7,12 @@ import axios from 'axios'
 function Hero({ datas, apiKey }) {
     // const API = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}&language=id-ID`
     const [movies, setMovies] = useState('')
+    const [open, setOpen] = useState(false)
     const API_KEY = apiKey
 
     useEffect(() => {
         getDetailMovies()
     }, [])
-
-
 
     async function getTrendingMovies() {
         const URL = `https://api.themoviedb.org/3//movie/now_playing?api_key=${API_KEY}`
@@ -34,7 +32,7 @@ function Hero({ datas, apiKey }) {
     return (
         // <div className='py-1 px-4 bg-cover h-50 md:h-90 xl:h-100 relative w-full' style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w300${movies.backdrop_path})` }}>
         <div
-            className="relative w-full h-[200px] md:h-[360px] xl:h-[400px] bg-cover bg-center"
+            className="relative w-full h-[200px] md:h-[360px] xl:h-[400px] bg-cover bg-center z-10"
             style={{
                 backgroundImage: `url(https://image.tmdb.org/t/p/original${movies.backdrop_path})`
             }}
@@ -49,7 +47,8 @@ function Hero({ datas, apiKey }) {
                 <small className=" text-yellow-500 text-[0.7rem] md:text-md md:mt-1 lg:text-lg"><FontAwesomeIcon icon={faStar} /><span className="md:font-bold"> {movies.vote_average}</span></small>
                 <p className="text-xs md:text-md md:mt-1 lg:text-lg md:font-bold">{movies && movies.release_date.split('-')[0]}</p>
 
-                <a href=""><button className="bg-orange-700 rounded-lg px-3 py-2 mt-1 font-bold flex items-center justify-center text-xs cursor-pointer w-full md:w-xs md:text-lg md:mt-5"> <CirclePlay size={12} className="mr-1" /> Watch Now</button></a>
+                <a href=""><button className="bg-orange-700 rounded-lg px-3 py-2 mt-1 font-bold flex items-center justify-center text-xs cursor-pointer w-full md:w-xs md:text-lg md:mt-5">
+                    <FontAwesomeIcon icon={faCirclePlay} className="mr-1 text-xs md:text-lg font-regular" /> Watch Now</button></a>
             </div>
         </div>
     )

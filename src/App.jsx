@@ -1,19 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import CardsContainer from './components/CardsContainer'
-import Hero from './components/Hero'
-import MovieCard from './components/MovieCard'
-import Navbar from './components/Navbar'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { Route, Routes } from 'react-router-dom'
-import Trending from './pages/Trending'
 import Home from './pages/Home'
+import Popular from './pages/Popular'
 
 function App() {
   const [movies, setMovies] = useState([])
   const API_KEY = 'c2c838e45044d635b520ad8a1749d89d'
-  const URL = `https://api.themoviedb.org/3//movie/now_playing?api_key=${API_KEY}`
+  const URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`
   const genres =
     useEffect(() => { getMovies() }, [])
 
@@ -39,7 +33,7 @@ function App() {
     <main>
       <Routes>
         <Route path='/' element={<Home datas={movies} API_KEY={API_KEY} />} />
-        <Route path='/trending' element={<Trending />} />
+        <Route path='/popular' element={<Popular />} />
       </Routes>
     </main>
   )
