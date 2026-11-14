@@ -52,7 +52,7 @@ function App() {
         <Route path='/' element={<Home datas={movies} API_KEY={API_KEY} setFavourites={setFavourites} favourites={favourites} />} />
         <Route path='/popular' element={<Popular datas={popular} API_KEY={API_KEY} favourites={favourites} setFavourites={setFavourites} />} />
         <Route path='/top-rated' element={<TopRated datas={topRated} API_KEY={API_KEY} favourites={favourites} setFavourites={setFavourites} />} />
-        <Route path='/favourites' element={<Favourites datas={favourites} favourites={favourites} />} />
+        <Route path='/favourites' element={<Favourites datas={favourites} favourites={favourites} setFavourites={setFavourites} />} />
       </Routes>
     </main>
   )

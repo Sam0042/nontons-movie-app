@@ -18,7 +18,7 @@ function CardsContainer({ datas, setFavourites, favouritesPage, favourites }) {
                 : 'grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8'}`}>
                 {datas.map((data) => {
                     return (
-                        <MovieCard data={data} key={data.id} setFavourites={setFavourites} favourites={favourites} />
+                        <MovieCard data={data} key={data.id} setFavourites={setFavourites} favourites={favourites} favouritesPage={favouritesPage} />
                     )
                 })}
             </div>
