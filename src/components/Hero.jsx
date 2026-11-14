@@ -5,17 +5,16 @@ import axios from 'axios'
 
 
 function Hero({ datas, apiKey }) {
-    // const API = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}&language=id-ID`
     const [movies, setMovies] = useState('')
-    const [open, setOpen] = useState(false)
     const API_KEY = apiKey
+    const trailer = movies && `https://www.youtube.com/watch?v=${movies.videos.results[0].key}`
 
     useEffect(() => {
         getDetailMovies()
     }, [])
 
     async function getTrendingMovies() {
-        const URL = `https://api.themoviedb.org/3//movie/now_playing?api_key=${API_KEY}`
+        const URL = `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`
         const response = await axios(URL)
         return response.data.results[0]
     }
@@ -30,9 +29,8 @@ function Hero({ datas, apiKey }) {
     const genres = movies && movies.genres.map((genre) => genre.name).join(', ')
 
     return (
-        // <div className='py-1 px-4 bg-cover h-50 md:h-90 xl:h-100 relative w-full' style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w300${movies.backdrop_path})` }}>
         <div
-            className="relative w-full h-[200px] md:h-[360px] xl:h-[400px] bg-cover bg-center z-10"
+            className="relative w-full h-[200px] md:h-[360px] lg:h-[500px] bg-cover bg-center z-10"
             style={{
                 backgroundImage: `url(https://image.tmdb.org/t/p/original${movies.backdrop_path})`
             }}
@@ -44,11 +42,11 @@ function Hero({ datas, apiKey }) {
                 <p className="text-xs md:text-xl italic md:mt-1 ">"{movies.tagline}"</p>
                 <p className="hidden md:block text-xs md:text-md md:mt-1 w-md lg:text-lg lg:w-xl text-justify">{movies.overview}</p>
                 <p className="text-xs md:text-xl md:mt-1 md:font-bold">{genres}</p>
-                <small className=" text-yellow-500 text-[0.7rem] md:text-md md:mt-1 lg:text-lg"><FontAwesomeIcon icon={faStar} /><span className="md:font-bold"> {movies.vote_average}</span></small>
+                <small className=" text-yellow-500 text-[0.7rem] md:text-md md:mt-1 lg:text-lg"><FontAwesomeIcon icon={faStar} /><span className="md:font-bold"> {movies.vote_average > 0 ? movies.vote_average : <span>TBD</span>}</span></small>
                 <p className="text-xs md:text-md md:mt-1 lg:text-lg md:font-bold">{movies && movies.release_date.split('-')[0]}</p>
 
-                <a href=""><button className="bg-orange-700 rounded-lg px-3 py-2 mt-1 font-bold flex items-center justify-center text-xs cursor-pointer w-full md:w-xs md:text-lg md:mt-5">
-                    <FontAwesomeIcon icon={faCirclePlay} className="mr-1 text-xs md:text-lg font-regular" /> Watch Now</button></a>
+                <a href={trailer}><button className="bg-orange-700 rounded-lg px-3 py-2 mt-1 font-bold flex items-center justify-center text-xs cursor-pointer w-full md:w-xs md:text-lg md:mt-5">
+                    <FontAwesomeIcon icon={faCirclePlay} className="mr-1 text-xs md:text-lg font-regular" /> Watch Trailer</button></a>
             </div>
         </div>
     )

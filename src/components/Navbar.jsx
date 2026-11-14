@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 
-function Navbar() {
+function Navbar({ favourites }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 200);
+            setScrolled(window.scrollY > 500);
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -37,17 +37,17 @@ function Navbar() {
                         <Link to={'/'} className={`hover:text-orange-700 ${location.pathname === '/' ? 'text-yellow-400' : 'text-white'}`}>Now Playing</Link>
                     </li>
                     <li>
-                        <Link to={'/popular'} className={`hover:text-orange-700 ${location.pathname === '/popular' ? 'text-orange-700' : 'text-white'}`}>Popular</Link>
+                        <Link to={'/popular'} className={`hover:text-orange-700 ${location.pathname === '/popular' ? 'text-yellow-400' : 'text-white'}`}>Popular</Link>
                     </li>
                     <li>
-                        <Link to={'/top-rated'} className={`hover:text-orange-700 ${location.pathname === '/top-rated' ? 'text-orange-700' : 'text-white'}`}>Top Rated</Link>
+                        <Link to={'/top-rated'} className={`hover:text-orange-700 ${location.pathname === '/top-rated' ? 'text-yellow-400' : 'text-white'}`}>Top Rated</Link>
                     </li>
                     <li>
-                        <Link to={'/up-coming'} className={`hover:text-orange-700 ${location.pathname === '/up-coming' ? 'text-orange-700' : 'text-white'}`}>Up Coming</Link>
+                        <Link to={'/favourites'} className={`hover:text-orange-700 ${location.pathname === '/favourites' ? 'text-yellow-400' : 'text-white'} md:!hidden`}>Favourites</Link>
                     </li>
                 </ul>
                 <FontAwesomeIcon icon={isMenuOpen ? faXmark : faBars} className="text-orange-700 cursor-pointer md:!hidden" size="xl" onClick={(e) => setIsMenuOpen(!isMenuOpen)} />
-                <FontAwesomeIcon icon={faCircleUser} className="text-orange-700 cursor-pointer !hidden md:!block" size="xl" />
+                <Link to={'/favourites'} className={`text-orange-700 hover:text-orange-700  cursor-pointer !hidden md:!block  ${location.pathname === '/favourites' ? 'text-yellow-400' : 'text-white'}`}>Favourites {favourites.length > 0 ? favourites.length : 'tidak'}</Link>
             </nav>
         </div>
     )

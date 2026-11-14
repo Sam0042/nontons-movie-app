@@ -1,7 +1,13 @@
-function Popular() {
+import CardsContainer from "../components/CardsContainer"
+import Hero from "../components/Hero"
+import Navbar from "../components/Navbar"
+
+function Popular({ datas, API_KEY, favourites, setFavourites }) {
     return (
-        <div className="popular-page">
-            <h1>hello</h1>
+        <div>
+            <Navbar favourites={favourites} />
+            <Hero datas={datas} apiKey={API_KEY} />
+            <CardsContainer datas={datas} setFavourites={setFavourites} favourites={favourites} />
         </div>
     )
 }
