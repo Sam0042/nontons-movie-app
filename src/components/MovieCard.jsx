@@ -9,12 +9,11 @@ function MovieCard({ data, setFavourites, favourites }) {
 
     function handleClick(e) {
         e.preventDefault()
-        setIsClicked(!IsClicked)
-        {
-            !IsClicked ? setFavourites(prevData => [...prevData, data]) : setFavourites(prevData =>
-                prevData.filter(movie => movie.id !== data.id)
-            )
-        }
+        setFavourites(prevData =>
+            prevData.some(movie => movie.id === data.id)
+                ? prevData.filter(movie => movie.id !== data.id)
+                : [...prevData, data]
+        )
     }
 
 
