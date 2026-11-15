@@ -6,7 +6,7 @@ function Popular({ datas, API_KEY, favourites, setFavourites }) {
     return (
         <div>
             <Navbar favourites={favourites} />
-            <Hero datas={datas} apiKey={API_KEY} />
+            <Hero datas={datas} apiKey={API_KEY} setFavourites={setFavourites} favourites={favourites} />
             <CardsContainer datas={datas} setFavourites={setFavourites} favourites={favourites} />
         </div>
     )

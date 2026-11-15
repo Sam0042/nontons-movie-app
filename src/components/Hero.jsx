@@ -1,13 +1,24 @@
-import { faCirclePlay, faSearch, faStar } from "@fortawesome/free-solid-svg-icons"
+import { faCirclePlay, faHeart, faSearch, faStar } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import axios from 'axios'
 
 
-function Hero({ datas, apiKey }) {
+function Hero({ datas, apiKey, setFavourites, favourites }) {
     const [movies, setMovies] = useState('')
     const API_KEY = apiKey
     const trailer = movies && `https://www.youtube.com/watch?v=${movies.videos.results[0].key}`
+
+    const isFavourite = favourites.some(movie => movie.id === movies.id)
+
+    function handleClick(e) {
+        e.preventDefault()
+        setFavourites(prevData =>
+            prevData.some(movie => movie.id === movies.id)
+                ? prevData.filter(movie => movie.id !== movies.id)
+                : [...prevData, movies]
+        )
+    }
 
     useEffect(() => {
         getDetailMovies()
@@ -45,8 +56,16 @@ function Hero({ datas, apiKey }) {
                 <small className=" text-yellow-500 text-[0.7rem] md:text-md md:mt-1 lg:text-lg"><FontAwesomeIcon icon={faStar} /><span className="md:font-bold"> {movies.vote_average > 0 ? movies.vote_average : <span>TBD</span>}</span></small>
                 <p className="text-xs md:text-md md:mt-1 lg:text-lg md:font-bold">{movies && movies.release_date.split('-')[0]}</p>
 
-                <a href={trailer}><button className="bg-orange-700 rounded-lg px-3 py-2 mt-1 font-bold flex items-center justify-center text-xs cursor-pointer w-full md:w-xs md:text-lg md:mt-5">
-                    <FontAwesomeIcon icon={faCirclePlay} className="mr-1 text-xs md:text-lg font-regular" /> Watch Trailer</button></a>
+                <div className="flex  p-2 justify-normal items-center pl-0 ">
+                    <a href={trailer}><button className="bg-orange-700 rounded-lg px-3 py-2 mt-1 font-bold flex items-center justify-center text-xs cursor-pointer w-full md:w-xs md:text-lg md:mt-5">
+                        <FontAwesomeIcon icon={faCirclePlay} className="mr-1 text-xs md:text-lg font-regular" /> Watch Trailer</button>
+                    </a>
+                    <a ><button className="group ml-2  bg-gray-800 rounded-lg px-2 py-2.5 md:py-3 mt-1 font-bold flex items-center justify-center text-xs cursor-pointer w-full  md:text-xl md:mt-5" onClick={(e) => handleClick(e)}>
+
+                        <FontAwesomeIcon icon={faHeart} className={`mx-auto text-md font-regular group-hover:text-gray-500 ${!isFavourite ? 'text-gray-300 ' : 'text-orange-700'}`} /></button>
+                    </a>
+                </div>
+
             </div>
         </div>
     )

@@ -31,7 +31,9 @@ function Navbar({ favourites }) {
                             </form>
                         </div> */}
             <nav className="flex justify-between items-center w-[92%] mx-auto py-1 ">
-                <h1 className="text-orange-700 font-bold text-xl">NONTONS</h1>
+                <Link to={'/'}>
+                    <h1 className="text-orange-700 font-bold text-xl">NONTONS</h1>
+                </Link>
                 <Link to={'/favourites'} className="md:!hidden  p-1 flex justify-center">
                     <FontAwesomeIcon icon={faHeart} className="text-orange-700 font-bold text-2xl" />
                     <small className="text-white absolute mt-0.5">{favourites.length > 0 ? favourites.length : '0'}</small>
