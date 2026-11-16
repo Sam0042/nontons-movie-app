@@ -1,4 +1,5 @@
-import { faBars, faCircleUser, faHeart, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faHeart } from "@fortawesome/free-regular-svg-icons"
+import { faBars, faCircleUser, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
@@ -34,26 +35,35 @@ function Navbar({ favourites }) {
                 <Link to={'/'}>
                     <h1 className="text-orange-700 font-bold text-xl">NONTONS</h1>
                 </Link>
-                <Link to={'/favourites'} className="md:!hidden  p-1 flex justify-center">
-                    <FontAwesomeIcon icon={faHeart} className="text-orange-700 font-bold text-2xl" />
-                    <small className="text-white absolute mt-0.5">{favourites.length > 0 ? favourites.length : '0'}</small>
+                <Link to={'/favourites'} className="md:!hidden p-1 flex justify-center relative">
+                    <FontAwesomeIcon icon={faHeart} className="text-white font-bold text-2xl" />
+                    <small className="text-white absolute bottom-1.5 right-[3px] bg-orange-700 rounded-full w-4 h-4 flex items-center justify-center font-bold text-[10px]">
+                        {favourites.length}
+                    </small>
                 </Link>
                 <ul className={`absolute md:static bg-black/80 md:bg-black/0 z-20 ${isMenuOpen ? 'top-full' : 'top-[-1500%]'} left-0 w-full md:w-auto flex items-center flex-col md:flex-row gap-[10vh] md:gap-10 lg:gap-20 min-h-[60vh] md:min-h-fit justify-center duration-400`}>
                     <li>
-                        <Link to={'/'} className={`hover:text-orange-700 ${location.pathname === '/' ? 'text-yellow-400' : 'text-white'}`}>Now Playing</Link>
+                        <Link to={'/'} className={`hover:text-orange-700 duration-500 ${location.pathname === '/' ? 'text-yellow-400' : 'text-white'}`}>Now Playing</Link>
                     </li>
                     <li>
-                        <Link to={'/popular'} className={`hover:text-orange-700 ${location.pathname === '/popular' ? 'text-yellow-400' : 'text-white'}`}>Popular</Link>
+                        <Link to={'/popular'} className={`hover:text-orange-700 duration-500 ${location.pathname === '/popular' ? 'text-yellow-400' : 'text-white'}`}>Popular</Link>
                     </li>
                     <li>
-                        <Link to={'/top-rated'} className={`hover:text-orange-700 ${location.pathname === '/top-rated' ? 'text-yellow-400' : 'text-white'}`}>Top Rated</Link>
+                        <Link to={'/top-rated'} className={`hover:text-orange-700 duration-500 ${location.pathname === '/top-rated' ? 'text-yellow-400' : 'text-white'}`}>Top Rated</Link>
                     </li>
                     <li>
-                        <Link to={'/favourites'} className={`hover:text-orange-700 ${location.pathname === '/favourites' ? 'text-yellow-400' : 'text-white'} md:!hidden`}>Favourites</Link>
+                        <Link to={'/favourites'} className={`hover:text-orange-700 duration-500 ${location.pathname === '/favourites' ? 'text-yellow-400' : 'text-white'} `}>Favourites</Link>
                     </li>
                 </ul>
                 <FontAwesomeIcon icon={isMenuOpen ? faXmark : faBars} className="text-orange-700 cursor-pointer md:!hidden" size="xl" onClick={(e) => setIsMenuOpen(!isMenuOpen)} />
-                <Link to={'/favourites'} className={`text-orange-700 hover:text-orange-700  cursor-pointer !hidden md:!block  ${location.pathname === '/favourites' ? 'text-yellow-400' : 'text-white'}`}>Favourites <span>{favourites.length > 0 ? favourites.length : '0'}</span></Link>
+                {/* <Link to={'/favourites'} className={`text-orange-700 hover:text-orange-700  cursor-pointer !hidden md:!block  ${location.pathname === '/favourites' ? 'text-yellow-400' : 'text-white'}`}>Favourites <span>{favourites.length > 0 ? favourites.length : '0'}</span>
+                </Link> */}
+                <Link to={'/favourites'} className="!hidden md:!block p-1 flex justify-center relative">
+                    <FontAwesomeIcon icon={faHeart} className="text-white font-bold text-2xl" />
+                    <small className="text-white absolute bottom-1.5 right-[3px] bg-orange-700 rounded-full w-4 h-4 flex items-center justify-center font-bold text-[10px]">
+                        {favourites.length}
+                    </small>
+                </Link>
             </nav>
         </div>
     )

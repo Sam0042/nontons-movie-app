@@ -57,12 +57,12 @@ function Hero({ datas, apiKey, setFavourites, favourites }) {
                 <p className="text-xs md:text-md md:mt-1 lg:text-lg md:font-bold">{movies && movies.release_date.split('-')[0]}</p>
 
                 <div className="flex  p-2 justify-normal items-center pl-0 ">
-                    <a href={trailer}><button className="bg-orange-700 rounded-lg px-3 py-2 mt-1 font-bold flex items-center justify-center text-xs cursor-pointer w-full md:w-xs md:text-lg md:mt-5">
+                    <a href={trailer}><button className="bg-orange-700 rounded-lg hover:bg-orange-600 duration-500 px-3 py-2 mt-1 font-bold flex items-center justify-center text-xs cursor-pointer w-full md:w-xs md:text-lg md:mt-5">
                         <FontAwesomeIcon icon={faCirclePlay} className="mr-1 text-xs md:text-lg font-regular" /> Watch Trailer</button>
                     </a>
-                    <a ><button className="group ml-2  bg-gray-800 rounded-lg px-2 py-2.5 md:py-3 mt-1 font-bold flex items-center justify-center text-xs cursor-pointer w-full  md:text-xl md:mt-5" onClick={(e) => handleClick(e)}>
+                    <a ><button className="group ml-2  bg-gray-800 rounded-lg px-2 py-2.5 md:py-3 mt-1 font-bold flex items-center justify-center text-xs cursor-pointer w-full md:text-xl md:mt-5 duration-500 hover:bg-gray-700" onClick={(e) => handleClick(e)}>
 
-                        <FontAwesomeIcon icon={faHeart} className={`mx-auto text-md font-regular group-hover:text-gray-500 ${!isFavourite ? 'text-gray-300 ' : 'text-orange-700'}`} /></button>
+                        <FontAwesomeIcon icon={faHeart} className={`mx-auto text-md font-regular duration-500 group-hover:text-gray-500 ${!isFavourite ? 'text-gray-300 ' : 'text-orange-700'}`} /></button>
                     </a>
                 </div>
 
